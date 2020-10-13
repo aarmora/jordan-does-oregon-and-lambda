@@ -1,0 +1,29 @@
+{
+  "name": "jordan-does-oregon-and-lambda",
+  "version": "1.0.0",
+  "description": "Jordan scrapes Oregon secretary of state and does it on Lambda.",
+  "main": "./dist/index.js",
+  "scripts": {
+    "zip": "tsc && 7z a -r function.zip ./dist/*  node_modules/",
+    "sendToLambda": "npm run zip && aws lambda update-function-code --function-name oregon --zip-file fileb://function.zip"
+  },
+  "keywords": [
+    "typescript",
+    "javascript",
+    "lambda"
+  ],
+  "author": "Jordan Hansen",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.771.0",
+    "axios": "^0.20.0",
+    "cheerio": "^1.0.0-rc.3"
+  },
+  "devDependencies": {
+    "@types/aws-sdk": "^2.7.0",
+    "@types/axios": "^0.14.0",
+    "@types/cheerio": "^0.22.22",
+    "@types/node": "^14.11.8",
+    "typescript": "^4.0.3"
+  }
+}
