@@ -14,14 +14,16 @@ exports.handler = async function (event, context) {
 
     const queryParmas: aws.DynamoDB.DocumentClient.QueryInput = {
         TableName: 'secretaryOfState',
-        AttributesToGet: [
-            'sosId'
-        ],
-        KeyConditionExpression: ''
-
+        FilterExpression: 'sosId = :sosId',
+        ExpressionAttributeValues: {
+            ':sosId': {N: 2163931}
+        },
+        KeyConditionExpression: 'sosId = :sosId',
+        ScanIndexForward: true
+            
     };
 
-    const sosId = documentClient.query(queryParmas).promise();
+    const sosId = documentClient.scan(queryParmas).promise();
 
     let errorCount = 0;
     let sosIdIncrement = 0;
